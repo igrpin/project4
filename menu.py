@@ -1,8 +1,4 @@
-from DB import Conexao
-
-
 class menu:
-    db = Conexao()
 
     def menuPrincipal(self):
         print('1 - Inserir Receita')

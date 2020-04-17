@@ -1,33 +1,32 @@
 import abc
-
 from DB import Conexao
 
+
 class Entrada(abc.ABC):
-    db = Conexao()
 
-    def __init__(self, valor):
-        self.valor = valor
+    def __init__(self):
+        self.db = Conexao()
 
-    @property
-    def valor(self):
-        return self.__valor
-
-    @valor.setter
-    def valor(self, valor):
-        if valor > 0:
-            self.__valor = valor
-        else:
-            print("Valor inválido")
+    # @property
+    # def valor(self):
+    #     return self.__valor
+    #
+    # @valor.setter
+    # def valor(self, valor):
+    #     if valor > 0:
+    #         self.__valor = valor
+    #     else:
+    #         print("Valor inválido")
 
     # Insere Receita ou Despesa
 
-    def inserirEntrada(self, tipoEntrada, thisCategoryId):
+    def inserirEntrada(self, valor, tipoEntrada, thisCategoryId):
         if tipoEntrada == 1:
             self.db.cursor.execute('''INSERT INTO receita(valor, categoria_id) 
-                    VALUES (%s, %s)''', (self.valor, thisCategoryId))
+                    VALUES (%s, %s)''', (valor, thisCategoryId))
         elif tipoEntrada == 2:
             self.db.cursor.execute('''INSERT INTO despesa(valor, categoria_id) 
-                    VALUES (%s, %s)''', (self.valor, thisCategoryId))
+                    VALUES (%s, %s)''', (valor, thisCategoryId))
         else:
             return print("Erro!")
         self.db.conexao.commit()
